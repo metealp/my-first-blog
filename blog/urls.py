@@ -5,6 +5,8 @@ urlpatterns = [
     #======BLOG_URLs======
     #list of posts
     path('', views.post_list, name='post_list'),
+    # path('', views.post_list.as_view(), name='post_list'),
+
     #CREATE
     path('post/new/', views.post_new, name='post_new'),
     path('post/<pk>/publish/', views.post_publish, name='post_publish'),

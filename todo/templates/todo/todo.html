@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/todo.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+        <title>Todo</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="font-weight-bold text-center display-4">
+                        <h1>Portfolio Todo</h1>
+                    </div>
+                    <h4>Add New Todo</h4>
+                    <!-- <form action="{% url 'add_todo' %}" method = "POST">{% csrf_token %} -->
+                    <form action="add_todo/" method = "POST">{% csrf_token %}
+                        <input type="text" name="content">
+                        <input type="datetime" name="deadline">
+                        <button class="btn btn-outline-info ">Submit</button>
+                    </form>
+                    <ul>
+                        {% for todo in todos %}
+                            <li>{{ todo.text}} <span class="date">deadline: {{ todo.deadline }}</span> 
+                                <form action="{%url 'delete_todo' pk=todo.todo_id%}" method = "POST">{% csrf_token %}
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </form> 
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
